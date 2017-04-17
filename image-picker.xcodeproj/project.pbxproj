@@ -41,7 +41,9 @@
 				A2887E541EA4723F00E225D7 /* image-picker */,
 				A2887E531EA4723F00E225D7 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		A2887E531EA4723F00E225D7 /* Products */ = {
 			isa = PBXGroup;
