@@ -57,13 +57,13 @@
                                 <rect key="frame" x="16" y="587" width="343" height="36"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cIr-fw-qfY">
                                 <rect key="frame" x="16" y="20" width="343" height="36"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -94,6 +94,7 @@
                         <outlet property="bottomTextField" destination="dMK-3m-4wD" id="ayi-FA-2Sc"/>
                         <outlet property="cameraButton" destination="hew-7S-WTJ" id="uNT-YI-MZF"/>
                         <outlet property="imageView" destination="Xew-Be-Aim" id="gJL-ZX-dzK"/>
+                        <outlet property="toolbar" destination="L4b-FK-BVh" id="FRT-j4-A2b"/>
                         <outlet property="topTextField" destination="cIr-fw-qfY" id="lb3-b8-NOa"/>
                     </connections>
                 </viewController>
