@@ -14,7 +14,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     NSStrokeColorAttributeName: UIColor.black,
     NSForegroundColorAttributeName: UIColor.white,
     NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-    NSStrokeWidthAttributeName: 4
+    NSStrokeWidthAttributeName: -4
   ]
   
   @IBOutlet weak var imageView: UIImageView!
@@ -22,7 +22,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   @IBOutlet weak var topTextField: UITextField!
   @IBOutlet weak var bottomTextField: UITextField!
   @IBOutlet weak var toolbar: UIToolbar!
-  
+  @IBOutlet weak var shareButton: UIBarButtonItem!
+  @IBOutlet weak var navbar: UINavigationBar!
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     topTextField.delegate = self
@@ -32,7 +34,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     topTextField.text = "TOP"
     topTextField.textAlignment = .center
     bottomTextField.text = "BOTTOM"
-    bottomTextField.textAlignment = .center;
+    bottomTextField.textAlignment = .center
+    shareButton.isEnabled = false
+    
   }
     
   override func viewWillAppear(_ animated: Bool) {
@@ -59,16 +63,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     imagePickerCtrl.sourceType = .camera
     present(imagePickerCtrl, animated: true, completion: nil)
   }
+    
+  @IBAction func cancelMeme() {
+    topTextField.text = "TOP"
+    bottomTextField.text = "BOTTOM"
+    imageView.image = nil
+  }
 
-  func saveMeme() {
+  @IBAction func saveMeme() {
     let meme = Meme(topText: topTextField.text!,
                     bottomText: bottomTextField.text!,
                     image: imageView.image!,
                     memedImage: generateMemedImage())
+    
+    let activityViewCtrl = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
+    self.present(activityViewCtrl, animated: true, completion: nil)
   }
   
   func generateMemedImage() -> UIImage {
     toolbar.isHidden = true
+    navbar.isHidden = true
     
     UIGraphicsBeginImageContext(self.view.frame.size)
     view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
@@ -76,6 +90,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     UIGraphicsEndImageContext()
     
     toolbar.isHidden = false
+    navbar.isHidden = false
     return memedImage
   }
   
@@ -91,6 +106,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
       imageView.image = image
       imageView.contentMode = .scaleAspectFit
+      shareButton.isEnabled = true
     }
     
     dismiss(animated: true, completion: nil)
@@ -102,6 +118,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     textField.resignFirstResponder()
     return true
   }
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    // Tag 0 refers top UITextField, and Tag 1 refers to bottom UITextField
+    if textField.text?.lowercased() == "top" && textField.tag == 0 {
+      textField.text = ""
+    }
+    if textField.text?.lowercased() == "bottom" && textField.tag == 1 {
+      textField.text = ""
+    }
+  }
+  
   
   // MARK: Handle UIKeyboard
   
