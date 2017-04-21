@@ -9,13 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-
-  let memeTextAttributes: [String: Any] = [
-    NSStrokeColorAttributeName: UIColor.black,
-    NSForegroundColorAttributeName: UIColor.white,
-    NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-    NSStrokeWidthAttributeName: -4
-  ]
   
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -24,19 +17,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   @IBOutlet weak var toolbar: UIToolbar!
   @IBOutlet weak var shareButton: UIBarButtonItem!
   @IBOutlet weak var navbar: UINavigationBar!
+
+  let memeTextAttributes: [String: Any] = [
+    NSStrokeColorAttributeName: UIColor.black,
+    NSForegroundColorAttributeName: UIColor.white,
+    NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+    NSStrokeWidthAttributeName: -4
+  ]
     
+  // MARK: Lifecycle Methods
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    topTextField.delegate = self
-    bottomTextField.delegate = self
-    topTextField.defaultTextAttributes = memeTextAttributes
-    bottomTextField.defaultTextAttributes = memeTextAttributes
-    topTextField.text = "TOP"
-    topTextField.textAlignment = .center
-    bottomTextField.text = "BOTTOM"
-    bottomTextField.textAlignment = .center
+    configureTextField(topTextField, withText: "TOP")
+    configureTextField(bottomTextField, withText: "BOTTOM")
     shareButton.isEnabled = false
-    
   }
     
   override func viewWillAppear(_ animated: Bool) {
@@ -49,21 +44,26 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     super.viewWillDisappear(animated)
     unsubscribeFromKeyboardNotifications()
   }
+
+  func configureTextField(_ textField: UITextField, withText: String = "") {
+    textField.delegate = self
+    textField.defaultTextAttributes = memeTextAttributes
+    textField.text = withText
+    textField.textAlignment = .center
+  }
+
+  // MARK: Actions
   
-  @IBAction func pickImage(_ sender: Any) {
+  @IBAction func pickImageFromGallery() { pickImage(sourceType: .photoLibrary) }
+  @IBAction func pickImageFromCamera() { pickImage(sourceType: .camera) }
+
+  func pickImage(sourceType: UIImagePickerControllerSourceType) {
     let imagePickerCtrl = UIImagePickerController()
     imagePickerCtrl.delegate = self
-    imagePickerCtrl.sourceType = .photoLibrary
+    imagePickerCtrl.sourceType = sourceType
     present(imagePickerCtrl, animated: true, completion: nil)
   }
   
-  @IBAction func pickImageFromCamera(_ sender: Any) {
-    let imagePickerCtrl = UIImagePickerController()
-    imagePickerCtrl.delegate = self
-    imagePickerCtrl.sourceType = .camera
-    present(imagePickerCtrl, animated: true, completion: nil)
-  }
-    
   @IBAction func cancelMeme() {
     topTextField.text = "TOP"
     bottomTextField.text = "BOTTOM"
@@ -73,19 +73,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   @IBAction func saveMeme() {
     let meme = Meme(topText: topTextField.text!,
                     bottomText: bottomTextField.text!,
-                    image: imageView.image!,
+                    originalImage: imageView.image!,
                     memedImage: generateMemedImage())
     
     let activityViewCtrl = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
-    self.present(activityViewCtrl, animated: true, completion: nil)
+    present(activityViewCtrl, animated: true, completion: nil)
   }
   
   func generateMemedImage() -> UIImage {
     toolbar.isHidden = true
     navbar.isHidden = true
     
-    UIGraphicsBeginImageContext(self.view.frame.size)
-    view.drawHierarchy(in: self.view.frame, afterScreenUpdates: true)
+    UIGraphicsBeginImageContext(view.frame.size)
+    view.drawHierarchy(in: view.frame, afterScreenUpdates: true)
     let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
     UIGraphicsEndImageContext()
     
@@ -102,7 +102,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   
   func imagePickerController(_ picker: UIImagePickerController,
                              didFinishPickingMediaWithInfo info: [String : Any]) {
-    
+
     if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
       imageView.image = image
       imageView.contentMode = .scaleAspectFit
@@ -121,19 +121,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
     // Tag 0 refers top UITextField, and Tag 1 refers to bottom UITextField
-    if textField.text?.lowercased() == "top" && textField.tag == 0 {
+    // Clear the text every time... 
       textField.text = ""
-    }
-    if textField.text?.lowercased() == "bottom" && textField.tag == 1 {
-      textField.text = ""
-    }
   }
-  
   
   // MARK: Handle UIKeyboard
   
   func keyboardWillShow(_ notification:Notification) {
-    view.frame.origin.y = 0 - getKeyboardHeight(notification)
+    if bottomTextField.isFirstResponder {
+      view.frame.origin.y = 0 - getKeyboardHeight(notification)
+    }
   }
   
   func keyboardWillHide(_ notification:Notification) {

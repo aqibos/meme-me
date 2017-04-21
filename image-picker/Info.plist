@@ -35,7 +35,9 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Preparing for Meme application. Thanks, playa!</string>
+	<string>Preparing for Meme application.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Preparing for Meme application.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

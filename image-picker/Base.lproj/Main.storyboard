@@ -45,13 +45,13 @@
                                 <items>
                                     <barButtonItem title="Gallery" id="nkq-3c-vdk">
                                         <connections>
-                                            <action selector="pickImage:" destination="BYZ-38-t0r" id="9XA-W7-Mhn"/>
+                                            <action selector="pickImageFromGallery" destination="BYZ-38-t0r" id="SaE-Cb-aUj"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Kly-oc-5DF"/>
                                     <barButtonItem systemItem="camera" id="hew-7S-WTJ">
                                         <connections>
-                                            <action selector="pickImageFromCamera:" destination="BYZ-38-t0r" id="UNA-46-Kg8"/>
+                                            <action selector="pickImageFromCamera" destination="BYZ-38-t0r" id="lR5-tD-Cgp"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
