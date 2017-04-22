@@ -13,7 +13,7 @@
         <!--Title-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="image_picker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="image_picker" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -65,7 +65,7 @@
                                     <navigationItem title="Meme Me" id="Jcc-1x-yUd">
                                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="OtU-HX-EUH">
                                             <connections>
-                                                <action selector="saveMeme" destination="BYZ-38-t0r" id="P28-zv-LDI"/>
+                                                <action selector="shareMeme:" destination="BYZ-38-t0r" id="5x9-YS-8pg"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="2YE-43-PyP">
