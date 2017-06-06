@@ -71,12 +71,20 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   }
 
   @IBAction func saveMeme() {
-    let meme = Meme(topText: topTextField.text!,
-                    bottomText: bottomTextField.text!,
-                    originalImage: imageView.image!,
-                    memedImage: generateMemedImage())
-    
-    let activityViewCtrl = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
+    let memedImage = generateMemedImage()
+    let activityViewCtrl = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
+    activityViewCtrl.completionWithItemsHandler = {
+      (activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) -> Void in
+      if (completed) {
+        let meme = Meme(topText: self.topTextField.text!,
+                        bottomText: self.bottomTextField.text!,
+                        originalImage: self.imageView.image!,
+                        memedImage: memedImage)
+        // TODO: Use meme var
+        print(String(describing: meme))
+        self.dismiss(animated: true, completion: nil)
+      }
+    }
     present(activityViewCtrl, animated: true, completion: nil)
   }
   
@@ -120,9 +128,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    // Tag 0 refers top UITextField, and Tag 1 refers to bottom UITextField
-    // Clear the text every time... 
-      textField.text = ""
+    let isFirstTimeEditingTop = textField.tag == 0 && textField.text == "TOP"
+    let isFirstTimeEditingBottom = textField.tag == 1 && textField.text == "BOTTOM"
+    if isFirstTimeEditingTop || isFirstTimeEditingBottom { textField.text = "" }
   }
   
   // MARK: Handle UIKeyboard
