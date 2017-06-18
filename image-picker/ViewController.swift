@@ -38,11 +38,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     super.viewWillAppear(animated)
     cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     subscribeToKeyboardNotifications()
+    self.navigationController?.isNavigationBarHidden = true
+    self.tabBarController?.tabBar.isHidden = true
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     unsubscribeFromKeyboardNotifications()
+    self.navigationController?.isNavigationBarHidden = false
+    self.tabBarController?.tabBar.isHidden = false
   }
 
   func configureTextField(_ textField: UITextField, withText: String = "") {
@@ -68,6 +72,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     topTextField.text = "TOP"
     bottomTextField.text = "BOTTOM"
     imageView.image = nil
+    self.navigationController?.popViewController(animated: true)
   }
 
   @IBAction func saveMeme() {
@@ -80,8 +85,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         bottomText: self.bottomTextField.text!,
                         originalImage: self.imageView.image!,
                         memedImage: memedImage)
-        // TODO: Use meme var
-        print(String(describing: meme))
+
+        (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
+
+        print("Saved meme in AppDelegate")
+        print("Now contains ...\((UIApplication.shared.delegate as! AppDelegate).memes.count)")
         self.dismiss(animated: true, completion: nil)
       }
     }
