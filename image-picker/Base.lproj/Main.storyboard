@@ -184,26 +184,26 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QM3-f1-lSq">
-                                            <rect key="frame" x="100" y="8" width="242" height="84"/>
+                                            <rect key="frame" x="108" y="0.0" width="234" height="100"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zPT-PB-CcO">
-                                            <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zPT-PB-CcO">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="84" id="Nv0-BJ-sa3"/>
+                                                <constraint firstAttribute="width" constant="100" id="y3e-GA-WX9"/>
                                             </constraints>
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="QM3-f1-lSq" secondAttribute="trailing" id="CXi-t0-1sF"/>
-                                        <constraint firstAttribute="bottom" secondItem="QM3-f1-lSq" secondAttribute="bottom" constant="7.5" id="FFR-3X-Q0r"/>
-                                        <constraint firstAttribute="bottom" secondItem="zPT-PB-CcO" secondAttribute="bottom" constant="7.5" id="PFb-gY-k81"/>
-                                        <constraint firstItem="QM3-f1-lSq" firstAttribute="top" secondItem="Fsu-1i-vuz" secondAttribute="top" constant="8" id="SZ3-NY-EUF"/>
-                                        <constraint firstItem="zPT-PB-CcO" firstAttribute="top" secondItem="Fsu-1i-vuz" secondAttribute="top" constant="8" id="Zd2-Kf-wVv"/>
-                                        <constraint firstItem="QM3-f1-lSq" firstAttribute="leading" secondItem="zPT-PB-CcO" secondAttribute="trailing" constant="8" id="rNF-Di-BqX"/>
-                                        <constraint firstItem="zPT-PB-CcO" firstAttribute="leading" secondItem="Fsu-1i-vuz" secondAttribute="leading" constant="8" id="zLz-Jk-0Ps"/>
+                                        <constraint firstItem="zPT-PB-CcO" firstAttribute="leading" secondItem="Fsu-1i-vuz" secondAttribute="leading" id="BQv-4D-0Dw"/>
+                                        <constraint firstItem="QM3-f1-lSq" firstAttribute="leading" secondItem="zPT-PB-CcO" secondAttribute="trailing" constant="8" id="GyQ-g6-2iM"/>
+                                        <constraint firstAttribute="trailing" secondItem="QM3-f1-lSq" secondAttribute="trailing" id="MmI-J4-5Xu"/>
+                                        <constraint firstAttribute="bottom" secondItem="zPT-PB-CcO" secondAttribute="bottom" constant="-0.5" id="iS8-8Z-lsZ"/>
+                                        <constraint firstItem="QM3-f1-lSq" firstAttribute="top" secondItem="Fsu-1i-vuz" secondAttribute="top" id="olf-tU-5Qx"/>
+                                        <constraint firstItem="zPT-PB-CcO" firstAttribute="top" secondItem="Fsu-1i-vuz" secondAttribute="top" id="qeH-Db-Pbb"/>
+                                        <constraint firstAttribute="bottom" secondItem="QM3-f1-lSq" secondAttribute="bottom" constant="-0.5" id="wDW-8P-4u2"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
