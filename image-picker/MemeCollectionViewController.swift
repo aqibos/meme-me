@@ -31,18 +31,6 @@ class MemeCollectionViewController: UICollectionViewController {
     flowLayout.itemSize = CGSize(width: dimension, height: dimension)
   }
 
-  override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//    if UIDevice.current.orientation.isPortrait {
-//      configureFlowLayout(view.frame.height)
-//      print("Height")
-//    } else {
-//      configureFlowLayout(view.frame.width)
-//      print("Width")
-//    }
-
-//    collectionView!.collectionViewLayout.invalidateLayout()p
-  }
-
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(true)
     collectionView?.reloadData()

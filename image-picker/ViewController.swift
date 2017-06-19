@@ -87,9 +87,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         memedImage: memedImage)
 
         (UIApplication.shared.delegate as! AppDelegate).memes.append(meme)
-
-        print("Saved meme in AppDelegate")
-        print("Now contains ...\((UIApplication.shared.delegate as! AppDelegate).memes.count)")
         self.dismiss(animated: true, completion: nil)
       }
     }
