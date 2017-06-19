@@ -35,4 +35,15 @@ class MemeTableViewController: UITableViewController {
     cell.previewText.text = "\(meme.topText) \(meme.bottomText)"
     return cell
   }
+
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let meme = memes[indexPath.row]
+    let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+    detailViewController.image = meme.memedImage
+    navigationController?.pushViewController(detailViewController, animated: true)
+  }
+
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 100
+  }
 }
